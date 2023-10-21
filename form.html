@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <form action="" method="post" class="form" id = "form-1">
+                <h3 class="heading">Thành viên đăng ký</h3>
+                <p class="desc">Cùng nhau học lập trình miễn phí tại F8 ❤️</p>
+                <div class="form-group">
+                        <div class="form-style">
+                            <label for="fullName" class="form-label">Tên đầy đủ</label>
+                            <input type="text" name="fullName" class="form-input" id = "fullName" placeholder="VD: Hồ Sỹ Thảo">
+                            <span class="form-message" id="span-name"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" name="email" class = "form-input" id = "email" placeholder="VD: hosithao1622004@gmail.com">
+                            <span class="form-message" id = "span-email"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="province" class="form-label">Tỉnh / Thành Phố</label>
+                            <select name="province" class = "form-input" id = "province">
+                                <option value="">Tỉnh / Thành Phố</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Sài Gòn">Sài Gòn</option>
+                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                <option value="Quảng Trị">Quảng Trị</option>
+                            </select>
+                            <span class="form-message" id = "span-province"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="avatar" class="form-label">Avatar</label>
+                            <input type="file" name="avatar"  class = "form-input" id ="avatar">
+                            <span class="form-message" id="span-avatar"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" name="password"  class = "form-input" id ="password" placeholder="Nhập mật khẩu">
+                            <span class="form-message" id="span-password"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="passwordConfirm" class="form-label">Nhập lại mật khẩu</label>
+                            <input type="password"  name ="passwordConfirm" class = "form-input" id ="passwordConfirm"   placeholder="Nhập lại mật khẩu">
+                            <span class="form-message" id="span-passwordConfirm" ></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="" class="form-label">Giới tính</label>
+                            <div class="gender-form">
+                                <input type="radio" name="gender" value="male" class="radio-form">
+                                Nam
+                            </div>
+                            <div class="gender-form">
+                            <input type="radio" name="gender" value="female" class="radio-form">
+                            Nữ
+                            </div>
+                            <span class="form-message" id = "span-gender"></span>
+                        </div>
+                        <div class="form-style">
+                            <label for="" class="form-label">Talents</label>
+                            <div class="gender-form">
+                                <input type="checkbox" name="talents" value="Nấu ăn" class="radio-form">
+                                Nấu ăn
+                            </div>
+                            <div class="gender-form">
+                                <input type="checkbox" name="talents" value="Lập trình" class="radio-form">
+                                Lập trình
+                            </div>
+                            <div class="gender-form">
+                                <input type="checkbox" name="talents" value="Thuyết trình" class="radio-form">
+                                Thuyết trình
+                            </div>
+                            <div class="gender-form">
+                                <input type="checkbox" name="talents" value="Sử lí tình huống" class="radio-form">
+                                Sử lí tình huống
+                            </div>
+                            <div class="gender-form">
+                                <input type="checkbox" name="talents" value="Đá bóng" class="radio-form">
+                                Đá bóng
+                            </div>
+                            <span class="form-message" id="span-talents"></span>
+                        </div>
+                </div>
+                <div class="summit">
+                    <button class="form-summit">Đăng ký</button>
+                </div>
+        </form>
+    </div>
+        <script src="./main.js"></script>
+        <script>
+                solutions({
+                    form : '#form-1',
+                     rules : [
+                        solutions.isRequired('#fullName' , '#span-name'),
+                        solutions.isRequired('#email' , '#span-email'),
+                        solutions.isEmail('#email' , '#span-email'),
+                        solutions.isRequired('#password' , '#span-password'),
+                        solutions.isPassWord('#password' , '#span-password' , 6),
+                        solutions.isCheckAgain('#password' , '#span-password', function() {
+                            if(document.querySelector('#passwordConfirm').value ==='') return document.querySelector('#password').value;
+                            else return document.querySelector('#passwordConfirm').value;
+                        }, function() {
+                            var inputElement = document.querySelector('#passwordConfirm');
+                            var spanElement = document.querySelector('#span-passwordConfirm');
+                            spanElement.classList.remove('red');
+                            inputElement.classList.remove('error');
+                            spanElement.innerText = '';
+                        }),
+                        solutions.isRequired('#passwordConfirm' , '#span-passwordConfirm'),
+                        solutions.passWordConfirm('#passwordConfirm', '#span-passwordConfirm' ,function() {
+                            return document.querySelector('#password').value;
+                        } , 'Mật khẩu nhập lại chưa đúng !',function(){
+                            var inputElement = document.querySelector('#password');
+                            var spanElement = document.querySelector('#span-password');
+                            spanElement.classList.remove('red');
+                            inputElement.classList.remove('error');
+                            spanElement.innerText = '';
+                        }),
+                        solutions.isRequired('[name="gender"]', '#span-gender'),
+                        solutions.isRequired('#province' , '#span-province'),
+                        solutions.isRequired('#avatar' , '#span-avatar'),
+                        // solutions.isRequired('[name ="talents"]' , '#span-talents')
+                    ],
+                    onsubmit : function(data) {
+                        console.log(data);
+                    }
+                })
+                solutions({
+                    form : '#form-2',
+                     rules : [
+                        solutions.isRequired('#email' , '#span-email'),
+                        solutions.isEmail('#email' , '#span-email'),
+                        solutions.isRequired('#password' , '#span-password'),
+                        solutions.isPassWord('#password' , '#span-password' , 6)
+                    ],
+                    onsubmit : function(data) {
+                        console.log(data);
+                    }
+                })
+        </script>
+</body>
+</html>
